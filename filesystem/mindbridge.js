@@ -26,9 +26,8 @@ class Robot {
                 }
             });
 
-            setTimeout (ping, 1 * 1000);
+            setTimeout (ping, 3 * 1000);
         })();
-
     }
 
     stop () {
@@ -126,7 +125,7 @@ class Joystick {
 
         window.addEventListener('resize', () => {
             self.joystick.removeClass('animated');
-            self.update({x: 0.5, y: 0.5});
+            self.updatePosition({x: 0.5, y: 0.5});
         });
 
         //
@@ -141,7 +140,7 @@ class Joystick {
             })
             .on ('pointerup', function (e) {
                 self.joystick.addClass('animated');
-                self.update({x: 0.5, y: 0.5});
+                self.updatePosition({x: 0.5, y: 0.5});
             });
     }
 
@@ -164,7 +163,7 @@ class Joystick {
         if (this.keys['ArrowLeft'] && this.keys['ArrowRight']) updatedPosition.x = 0.5;
         if (this.keys['ArrowUp'] && this.keys['ArrowDown']) updatedPosition.y = 0.5;
 
-        this.update(updatedPosition);
+        this.updatePosition(updatedPosition);
     }
 
     updateMouse(e) {
@@ -182,7 +181,7 @@ class Joystick {
         y = Math.max(0, Math.min(y, 1));
 
         const snappedPosition = this.snapHotspots({x, y});
-        this.update(snappedPosition);
+        this.updatePosition(snappedPosition);
     }
 
     distSq(x1, y1, x2, y2) {
@@ -208,7 +207,7 @@ class Joystick {
         return updatedPosition;
     }
 
-    update(updatedPosition) {
+    updatePosition(updatedPosition) {
         const touchpadWidth = this.touchpad.width();
         const touchpadHeight = this.touchpad.height();
 
